@@ -1,0 +1,26 @@
+#!/bin/bash
+
+output_file="output.log"
+count=0
+test_script="$HOME/shell/Exercise2/test_script"
+
+> "$output_file"
+
+echo "Running iteration: $test_script"
+while true; do
+    ((count++))
+
+    $test_script &>> "$output_file"
+   
+    if [ $? -ne 0 ]; then
+        echo "Commad failed!"
+        break
+    fi
+done
+
+echo "Execution count: $count"
+echo "output and error:"
+cat "$output_file"
+
+
+
